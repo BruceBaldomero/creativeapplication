@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import firebase from 'firebase'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUser, fetchUserPosts, fetchUserFollowing, clearData } from '../redux/actions/index'

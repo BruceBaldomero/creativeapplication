@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Image, FlatList, Button } from 'react-native'
 
-import firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
 import { connect } from 'react-redux'
 
 function Profile(props) {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { View, TextInput, Image, Button } from 'react-native'
 
-import firebase from 'firebase'
-require("firebase/firestore")
-require("firebase/storage")
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
+import 'firebase/compat/storage'
 
 
 export default function Save(props) {

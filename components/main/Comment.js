@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
-import firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

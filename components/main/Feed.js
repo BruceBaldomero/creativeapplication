@@ -3,8 +3,9 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import moment from 'moment'
 
-import firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
 import { connect } from 'react-redux'
 
 function Feed(props) {
