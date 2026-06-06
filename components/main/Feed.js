@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { StyleSheet, View, Text, Image, FlatList, Button } from 'react-native'
+import { FontAwesome5 } from '@expo/vector-icons'
+import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import moment from 'moment'
 
 import firebase from 'firebase'
@@ -51,53 +50,48 @@ function Feed(props) {
                     data={posts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <View
-                            style={styles.containerImage}>
-                            <FontAwesome5 style={{paddingLeft:5}} name={'user-alt'}> <Text style={{...styles.container, ...styles.bold}}>{item.user.name}
-                            </Text>
-                             </FontAwesome5>
+                        <View style={styles.containerImage}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 5, paddingVertical: 4 }}>
+                                <FontAwesome5 name={'user-alt'} size={12} color="#000" />
+                                <Text style={{ fontWeight: 'bold', marginLeft: 5 }}>{item.user.name}</Text>
+                            </View>
                             <Image
                                 style={styles.image}
                                 source={{ uri: item.downloadURL }}
                             />
                             {item.currentUserLike ?
                                 (
-                                    <Icon.Button
-                                        name="heart"
-                                        color="#ff0000"
-                                        backgroundColor="#0000"
-                                        title="Dislike"
-                                        onPress={() => onDislikePress(item.user.uid, item.id)} >  </Icon.Button>
+                                    <TouchableOpacity
+                                        style={styles.likeButton}
+                                        onPress={() => onDislikePress(item.user.uid, item.id)}>
+                                        <FontAwesome5 name="heart" size={20} color="#ff0000" />
+                                    </TouchableOpacity>
                                 )
                                 :
                                 (
-                                    <Icon.Button
-                                        name="heart"
-                                        color="#000"
-                                        backgroundColor="#0000"
-                                        title="Like"
-                                        onPress={() => onLikePress(item.user.uid, item.id)} >  </Icon.Button>
+                                    <TouchableOpacity
+                                        style={styles.likeButton}
+                                        onPress={() => onLikePress(item.user.uid, item.id)}>
+                                        <FontAwesome5 name="heart" size={20} color="#000" />
+                                    </TouchableOpacity>
                                 )
                             }
-                            <Text style={{ fontWeight: 'bold', paddingLeft:5}}>
+                            <Text style={{ fontWeight: 'bold', paddingLeft: 5 }}>
                                 {item.user.name}
                                 <Text style={{ fontWeight: 'normal' }}> {item.caption}</Text>
                             </Text>
-                            <Text style={{color:'#808080', paddingLeft:5}}
+                            <Text style={{ color: '#808080', paddingLeft: 5 }}
                                 onPress={() => props.navigation.navigate('Comment', { postId: item.id, uid: item.user.uid })}>
                                 Add a comment...
                             </Text>
-                            <Text style={{color:'#c0c0c0', paddingLeft:5, fontSize:10}}>
+                            <Text style={{ color: '#c0c0c0', paddingLeft: 5, fontSize: 10 }}>
                                 {moment(item.creation.toDate()).startOf('hour').fromNow()}
                             </Text>
                         </View>
-
                     )}
-
                 />
             </View>
         </View>
-
     )
 }
 
@@ -119,17 +113,16 @@ const styles = StyleSheet.create({
         flex: 1,
         aspectRatio: 1 / 1
     },
-    bold: {
-        fontWeight: 'bold'
+    likeButton: {
+        paddingLeft: 5,
+        paddingVertical: 4
     }
-    
 })
+
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     following: store.userState.following,
     feed: store.usersState.feed,
     usersFollowingLoaded: store.usersState.usersFollowingLoaded,
-
-
 })
 export default connect(mapStateToProps, null)(Feed);

@@ -2,18 +2,14 @@
   "expo": {
     "name": "SOLENT INSPIRE",
     "slug": "creativeapplication",
-    "privacy": "public",
     "version": "1.0.0",
+    "sdkVersion": "52.0.0",
     "orientation": "portrait",
-    "githubUrl": "https://github.com/brucebonus/creative-application",
     "icon": "./assets/fire.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"

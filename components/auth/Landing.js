@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { FontAwesome5 } from '@expo/vector-icons'
 
 export default function Landing({ navigation }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Icon name='fire' style={{ fontSize: 50, textAlign: 'center' }}></Icon>
+            <FontAwesome5 name='fire' size={50} color="#000" />
             <Text style={{ textAlignVertical: "center", textAlign: "center", fontSize: 35, fontWeight: 'bold', height: 300 }} >
                 SOLENT INSPIRE
             </Text>

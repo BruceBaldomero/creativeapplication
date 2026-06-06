@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import { View, Text, FlatList, Button, TextInput } from 'react-native'
+import { FontAwesome5 } from '@expo/vector-icons'
+import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
 import firebase from 'firebase'
 require('firebase/firestore')
@@ -8,7 +8,6 @@ require('firebase/firestore')
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUsersData } from '../../redux/actions/index'
-import { user } from '../../redux/reducers/user';
 
 function Comment(props) {
     const [comments, setComments] = useState([])
@@ -32,7 +31,6 @@ function Comment(props) {
             }
             setComments(comments)
         }
-
 
         if (props.route.params.postId !== postId) {
             firebase.firestore()
@@ -71,16 +69,16 @@ function Comment(props) {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <FlatList
                 numColumns={1}
                 horizontal={false}
                 data={comments}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <View>
+                    <View style={styles.commentRow}>
                         {item.user !== undefined ?
-                            <Text style={{fontWeight:'bold'}}>
+                            <Text style={{ fontWeight: 'bold' }}>
                                 {item.user.name}
                             </Text>
                             : null}
@@ -89,24 +87,56 @@ function Comment(props) {
                 )}
             />
 
-            <View>
+            <View style={styles.inputRow}>
                 <TextInput
+                    style={styles.input}
                     placeholder='comment...'
                     onChangeText={(text) => setText(text)} />
-                <Icon.Button
-                    name="comment"
-                    color="#fff"
-                    backgroundColor="#000"
-                    onPress={() => onCommentSend()}
-                    title="Send"
-                    > Send
-                </Icon.Button>
+                <TouchableOpacity style={styles.sendButton} onPress={onCommentSend}>
+                    <FontAwesome5 name="comment" size={16} color="#fff" />
+                    <Text style={styles.sendText}>Send</Text>
+                </TouchableOpacity>
             </View>
-
         </View>
     )
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    commentRow: {
+        paddingHorizontal: 10,
+        paddingVertical: 6
+    },
+    inputRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 8,
+        borderTopWidth: 1,
+        borderTopColor: '#eee'
+    },
+    input: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 4,
+        padding: 8,
+        marginRight: 8
+    },
+    sendButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#000',
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderRadius: 4
+    },
+    sendText: {
+        color: '#fff',
+        marginLeft: 6
+    }
+})
 
 const mapStateToProps = (store) => ({
     users: store.usersState.users
