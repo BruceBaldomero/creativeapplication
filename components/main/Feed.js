@@ -49,6 +49,7 @@ function Feed(props) {
                     numColumns={1}
                     horizontal={false}
                     data={posts}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View
                             style={styles.containerImage}>

@@ -13,7 +13,7 @@ function Profile(props) {
     useEffect(() => {
         const { currentUser, posts } = props;
 
-        if (props.route.params.uid === firebase.auth().currentUser.uid) {
+        if (firebase.auth().currentUser && props.route.params.uid === firebase.auth().currentUser.uid) {
             setUser(currentUser)
             setUserPosts(posts)
         }
@@ -84,7 +84,7 @@ function Profile(props) {
                 <Text style={{fontWeight: 'bold'}}>{user.name}</Text>
                 <Text>{user.email}</Text>
 
-                {props.route.params.uid !== firebase.auth().currentUser.uid ? (
+                {firebase.auth().currentUser && props.route.params.uid !== firebase.auth().currentUser.uid ? (
                     <View>
                         {following ? (
                             <Button
@@ -114,6 +114,7 @@ function Profile(props) {
                     numColumns={3}
                     horizontal={false}
                     data={userPosts}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View
                             style={styles.containerImage}>

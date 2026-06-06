@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { View, Text } from 'react-native'
 
-import * as firebase from 'firebase'
+import firebase from 'firebase'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
@@ -92,9 +92,9 @@ export class App extends Component {
         <NavigationContainer >
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="SOLENT INSPIRE" component={MainScreen} options={{headerTitleAlign: 'center'}}/>
-            <Stack.Screen name="Upload" component={UploadScreen} navigation={this.props.navigation} options={{headerTitleAlign: 'center', title:'UPLOAD'}}/>
-            <Stack.Screen name="Uploadbut" component={UploadbutScreen} navigation={this.props.navigation} options={{headerTitleAlign: 'center', title:'Upload'}}/>
-            <Stack.Screen name="Comment" component={CommentScreen} navigation={this.props.navigation} options={{headerTitleAlign: 'center'}}/>
+            <Stack.Screen name="Upload" component={UploadScreen} options={{headerTitleAlign: 'center', title:'UPLOAD'}}/>
+            <Stack.Screen name="Uploadbut" component={UploadbutScreen} options={{headerTitleAlign: 'center', title:'Upload'}}/>
+            <Stack.Screen name="Comment" component={CommentScreen} options={{headerTitleAlign: 'center'}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

@@ -11,6 +11,7 @@ export default function Search(props) {
         firebase.firestore()
             .collection('users')
             .where('name', '>=', search)
+            .where('name', '<=', search + '')
             .get()
             .then((snapshot) => {
                 let users = snapshot.docs.map(doc => {
@@ -31,6 +32,7 @@ export default function Search(props) {
                 numColumns={1}
                 horizontal={false}
                 data={users}
+                keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate("Profile", {uid: item.id})}>

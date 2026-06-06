@@ -76,6 +76,7 @@ function Comment(props) {
                 numColumns={1}
                 horizontal={false}
                 data={comments}
+                keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View>
                         {item.user !== undefined ?
